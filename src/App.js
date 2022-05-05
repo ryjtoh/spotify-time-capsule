@@ -1,12 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
-import Header from './components/Header/Header';
+import SpotifyAuthButton from './components/SpotifyAuthButton/SpotifyAuthButton';
+import Filters from './components/Filters/Filters';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Header/>
+        <SpotifyAuthButton/>
+        <Filters/>
       </header>
     </div>
   );
