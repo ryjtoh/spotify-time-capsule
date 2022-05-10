@@ -18,7 +18,7 @@ function Filters() {
   }, []);
 
   useEffect(() => {
-    console.log(playlists)
+    //console.log(playlists)
     console.log(token)
     console.log(userId)
   }, []);
@@ -29,8 +29,28 @@ function Filters() {
         Authorization: "Bearer " + token,
       },
     }).then((response) => {
-      var temp = response.data["items"]
-      setPlaylists(temp)
+      for (var i=0; i < response.data["items"].length; i++) {
+        var endpoint = response.data.items[i].tracks.href
+        handleGetPlaylistDetails(endpoint)
+      }
+      //setPlaylists(temp)
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+  const handleGetPlaylistDetails = (playlistId) => {
+    axios.get(playlistId, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }).then((response) => {
+      //console.log(response.data)
+      var songs = response.data.items
+      for (var i = 0; i < response.data.items.length; i++) {
+        console.log((songs[i].added_at).substring(0, 10))
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -56,7 +76,7 @@ function Filters() {
         Authorization: "Bearer " + token,
       },
     }).then((songs) => {
-      console.log(songs.data)
+      //console.log(songs.data)
     })
     .catch((error) => {
       console.log(error);
